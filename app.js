@@ -1,0 +1,22 @@
+import Logger from "./classes/Logger";
+import Server from "./classes/Server";
+
+/**
+ * Define Application start
+ * @returns {Promise<void>}
+ */
+const start = async () => {
+    try {
+        // Initialize the server
+        await Server.init();
+    } catch (err) {
+        Logger.error(`Error while starting the app: ${err.message}`);
+        Logger.error(`Error: %O`, err);
+
+        throw err;
+        process.exit(1);
+    }
+};
+
+// Start the server
+start();

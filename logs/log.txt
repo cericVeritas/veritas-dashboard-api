@@ -1,0 +1,219 @@
+---- ur
+Date: Sat Jun 07 2025 20:03:15 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:36:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:04:05 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:36:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:04:38 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:36:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:04:50 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:36:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:09:18 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:34:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:09:26 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:34:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:49:56 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:34:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:50:21 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:34:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:51:50 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:34:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:52:00 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/OrganizationModel.js:70:46)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:29:56)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:52:05 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/OrganizationModel.js:70:46)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:29:56)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:52:14 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:34:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Sat Jun 07 2025 20:54:34 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'model')
+TypeError: Cannot read properties of undefined (reading 'model')
+    at Object.init (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:34:40)
+    at Database.init (/Users/jbskis/apps/veritas-dashboard-api/classes/database_veritas.js:28:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'model')---- ur
+Date: Tue Jul 15 2025 11:50:43 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
+MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
+    at _handleConnectionErrors (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017---- ur
+Date: Thu Jul 17 2025 11:44:10 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+    at _handleConnectionErrors (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)---- ur
+Date: Thu Jul 17 2025 12:07:24 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+    at _handleConnectionErrors (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)---- ur
+Date: Thu Jul 17 2025 12:11:13 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+    at _handleConnectionErrors (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)---- ur
+Date: Thu Jul 17 2025 12:13:53 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+    at _handleConnectionErrors (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)---- ur
+Date: Thu Jul 17 2025 12:15:10 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+    at _handleConnectionErrors (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)---- ur
+Date: Thu Jul 17 2025 12:22:00 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)
+    at _handleConnectionErrors (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1165:11)
+    at NativeConnection.openUri (/Users/jbskis/apps/veritas-dashboard-api/node_modules/mongoose/lib/connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: Server at localhost:27017 reports maximum wire version 7, but this version of the Node.js Driver requires at least 8 (MongoDB 4.2)---- ur
+Date: Thu Jul 17 2025 14:31:26 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: inviteModel.model is not a constructor
+TypeError: inviteModel.model is not a constructor
+    at Object.create (/Users/jbskis/apps/veritas-dashboard-api/models/InviteModel.js:92:17)
+    at Object.<anonymous> (/Users/jbskis/apps/veritas-dashboard-api/controllers/InviteController.js:27:28)
+    at Generator.next (<anonymous>)
+    at Xc.resumeChildren (/Users/jbskis/apps/veritas-dashboard-api/node_modules/esm-wallaby/esm.js:1:311249)
+    at Object.resumeChildren (/Users/jbskis/apps/veritas-dashboard-api/node_modules/esm-wallaby/esm.js:1:276504)
+    at Object.<anonymous> (/Users/jbskis/apps/veritas-dashboard-api/classes/Server.js:1:1883)
+    at Generator.next (<anonymous>)
+    at Xc.resumeChildren (/Users/jbskis/apps/veritas-dashboard-api/node_modules/esm-wallaby/esm.js:1:311249)
+    at Object.resumeChildren (/Users/jbskis/apps/veritas-dashboard-api/node_modules/esm-wallaby/esm.js:1:276504)
+    at Object.<anonymous> (/Users/jbskis/apps/veritas-dashboard-api/app.js:1:313)
+Exception origin: TypeError: inviteModel.model is not a constructor---- ur
+Date: Tue Aug 05 2025 18:30:16 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'address')
+TypeError: Cannot read properties of undefined (reading 'address')
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:457:50)
+    at upload (/Users/jbskis/apps/veritas-dashboard-api/controllers/FileController.js:224:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'address')---- ur
+Date: Tue Aug 05 2025 18:30:16 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'address')
+TypeError: Cannot read properties of undefined (reading 'address')
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:457:50)
+    at upload (/Users/jbskis/apps/veritas-dashboard-api/controllers/FileController.js:224:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'address')---- ur
+Date: Tue Aug 05 2025 18:30:16 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: Cannot read properties of undefined (reading 'address')
+TypeError: Cannot read properties of undefined (reading 'address')
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:457:50)
+    at upload (/Users/jbskis/apps/veritas-dashboard-api/controllers/FileController.js:224:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: TypeError: Cannot read properties of undefined (reading 'address')---- ur
+Date: Tue Aug 05 2025 18:32:45 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:464:29)
+    at upload (/Users/jbskis/apps/veritas-dashboard-api/controllers/FileController.js:224:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Tue Aug 05 2025 18:32:45 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:464:29)
+    at upload (/Users/jbskis/apps/veritas-dashboard-api/controllers/FileController.js:224:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Tue Aug 05 2025 18:34:01 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:464:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Tue Aug 05 2025 18:34:01 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:464:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Tue Aug 05 2025 18:34:01 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:464:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Tue Aug 05 2025 18:36:12 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:465:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Tue Aug 05 2025 18:36:12 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:465:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Tue Aug 05 2025 18:36:12 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: ReferenceError: response is not defined
+ReferenceError: response is not defined
+    at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:465:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: ReferenceError: response is not defined

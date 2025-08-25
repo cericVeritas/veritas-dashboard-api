@@ -284,6 +284,10 @@ const UserController = {
           let inviteLookup = await InviteModel.findByCode(code);
           console.log('invite️‍🔥',code,inviteLookup);
 
+          if(!inviteLookup.role && code == "init"){
+            inviteLookup.role = "superadmin,admin";
+          }
+
           // Validate inputs
           if (!req.body.email || !req.body.password)
               throw new Errors.INVALID_BODY();

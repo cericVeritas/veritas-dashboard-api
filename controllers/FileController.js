@@ -19,6 +19,14 @@ import bodyParser from 'body-parser';
 import { X12parser } from 'x12-parser';
 import { createReadStream } from 'node:fs';
 import { nanoid } from 'nanoid';
+
+// Custom slug generator that creates clean, readable slugs
+function generateCleanSlug() {
+    // Generate a shorter nanoid with only alphanumeric characters
+    const cleanId = nanoid(12).replace(/[^a-zA-Z0-9]/g, '');
+    // Add a prefix to make it more readable and buffer it
+    return `file_${cleanId}`;
+}
 import { parseX12File, addGeoX12, processX12 } from '../services/fileHelpers';
 import needle from 'needle';
 
@@ -137,6 +145,7 @@ const FileController = {
             let org = req.body.org;
             let query = {
                 organization: org,
+                isParent: true,
                 $or: [
                     { name: { $regex: q, $options: 'i' } },
                     { rawFile: { $regex: q, $options: 'i' } },
@@ -206,7 +215,7 @@ const FileController = {
                 creator: user.id,
                 updater: user.id,
                 organization: result.organization._id,
-                slug: nanoid(),
+                slug: generateCleanSlug(),
             };
 
             const fileCreated = await FileModel.create(newFile);
@@ -368,7 +377,7 @@ const FileController = {
                 creator: user.id,
                 updater: user.id,
                 organization: org,
-                slug: nanoid(),
+                slug: generateCleanSlug(),
             };
 
             const result = await FileModel.create(newFile);

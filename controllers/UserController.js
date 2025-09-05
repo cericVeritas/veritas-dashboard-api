@@ -284,8 +284,9 @@ const UserController = {
           let inviteLookup = await InviteModel.findByCode(code);
           console.log('invite️‍🔥',code,inviteLookup);
 
-          if(!inviteLookup.role && code == "init"){
-            inviteLookup.role = "superadmin,admin";
+          if(!inviteLookup && code == "init"){
+            inviteLookup = {};
+            inviteLookup.role = "superadmin";
           }
 
           // Validate inputs

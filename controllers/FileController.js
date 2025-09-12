@@ -25,7 +25,7 @@ function generateCleanSlug() {
     // Generate a shorter nanoid with only alphanumeric characters
     const cleanId = nanoid(12).replace(/[^a-zA-Z0-9]/g, '');
     // Add a prefix to make it more readable and buffer it
-    return `file_${cleanId}`;
+    return `${cleanId}`;
 }
 import { parseX12File, addGeoX12, processX12 } from '../services/fileHelpers';
 import needle from 'needle';
@@ -229,7 +229,7 @@ const FileController = {
             };
 
             let resultUpdated = await FileModel.update(updateData);
-            console.log('resultUpdated',resultUpdated);
+            // console.log('resultUpdated',resultUpdated);
             
 
             

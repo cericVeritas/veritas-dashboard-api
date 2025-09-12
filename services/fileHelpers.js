@@ -7,423 +7,431 @@ import needle from 'needle';
 
 
 export function parseX12File(content) {
-  console.log('content',content);
-    const segments = content
-      .split(/\r?\n|~/)
-      .map((seg) => seg.trim())
-      .filter(Boolean);
-  
-    const claims = [];
-    let currentClaim = null;
-    let currentService = null;
-    let currentEnvelope = null;
-    let currentFunctionalGroup = null;
-    let currentEntityType = null;
-    let currentAddressBuffer = {};
-    let loopStack = [];
-    let lastEntityType = null;
-  
-    const map = {
-      '41': 'submitter',
-      '40': 'receiver',
-      '85': 'provider',
-      '87': 'serviceProvider',
-      'IL': 'subscriber',
-      'QC': 'patient',
-      '71': 'renderingProvider',
-      'PR': 'payer',
-      'DN': 'referringProvider',
-      '72': 'supervisingProvider',
-      '73': 'orderingProvider',
-      '77': 'serviceLocation',
-      '36': 'employer',
-      'ZZ': 'otherEntity'
-    };
-  
-    function getLoopContext(loopId) {
-      if (!currentClaim.loops) currentClaim.loops = {};
-      if (!currentClaim.loops[loopId]) currentClaim.loops[loopId] = {};
-      return currentClaim.loops[loopId];
-    }
-  
-    function normalizeLoops(claim) {
-      const result = {};
-      const loops = claim.loops || {};
-  
-      result.header = loops.header || {};
-  
-      for (const [loopId, data] of Object.entries(loops)) {
-        if (loopId === 'header') continue;
-  
-        const keys = Object.keys(data);
-  
-        if (keys.includes('provider')) {
-          result.billingProvider = data;
-        }
-  
-        if (keys.includes('subscriber')) {
-          result.subscriber = {
-            ...data.subscriber,
-            address: data.address,
-            demographics: data.demographics,
-            payer: data.payer,
-            renderingProvider: data.renderingProvider,
-            contact: data.contact
-          };
-        }
-  
-        if (keys.includes('patient')) {
-          result.patient = {
-            ...data.patient,
-            address: data.address,
-            demographics: data.demographics,
-            contact: data.contact
-          };
-        }
-  
-        if (loopId === '2000B' && data.subscriberInfo) {
-          result.subscriber = result.subscriber || {};
-          result.subscriber.subscriberInfo = data.subscriberInfo;
-        }
+
+  const segments = content
+    .split(/\r?\n|~/)
+    .map((seg) => seg.trim())
+    .filter(Boolean);
+
+  const claims = [];
+  let currentClaim = null;
+  let currentService = null;
+  let currentEnvelope = null;
+  let currentFunctionalGroup = null;
+  let currentEntityType = null;
+  let currentAddressBuffer = {};
+  let loopStack = [];
+  let lastEntityType = null;
+
+  const map = {
+    '41': 'submitter',
+    '40': 'receiver',
+    '85': 'provider',
+    '87': 'serviceProvider',
+    'IL': 'subscriber',
+    'QC': 'patient',
+    '71': 'renderingProvider',
+    'PR': 'payer',
+    'DN': 'referringProvider',
+    '72': 'supervisingProvider',
+    '73': 'orderingProvider',
+    '77': 'serviceLocation',
+    '36': 'employer',
+    'ZZ': 'otherEntity'
+  };
+
+  function getLoopContext(loopId) {
+    if (!currentClaim.loops) currentClaim.loops = {};
+    if (!currentClaim.loops[loopId]) currentClaim.loops[loopId] = {};
+    return currentClaim.loops[loopId];
+  }
+
+  function normalizeLoops(claim) {
+    const result = {};
+    const loops = claim.loops || {};
+
+    result.header = loops.header || {};
+
+    for (const [loopId, data] of Object.entries(loops)) {
+      if (loopId === 'header') continue;
+
+      const keys = Object.keys(data);
+
+      if (keys.includes('provider')) {
+        result.billingProvider = data;
       }
-  
-      claim.loops = result;
+
+      if (keys.includes('subscriber')) {
+        result.subscriber = {
+          ...data.subscriber,
+          address: data.address,
+          demographics: data.demographics,
+          payer: data.payer,
+          renderingProvider: data.renderingProvider,
+          contact: data.contact
+        };
+      }
+
+      if (keys.includes('patient')) {
+        result.patient = {
+          ...data.patient,
+          address: data.address,
+          demographics: data.demographics,
+          contact: data.contact
+        };
+      }
+
+      if (loopId === '2000B' && data.subscriberInfo) {
+        result.subscriber = result.subscriber || {};
+        result.subscriber.subscriberInfo = data.subscriberInfo;
+      }
     }
-  
-    for (let i = 0; i < segments.length; i++) {
-      const parts = segments[i].split("*");
-      const tag = parts[0];
-  
-      switch (tag) {
-        case "ISA":
-          currentEnvelope = {
-            senderId: parts[6] || '',
-            receiverId: parts[8] || '',
-            date: parts[9] || '',
-            time: parts[10] || '',
-            controlNumber: parts[13] || '',
-            usageIndicator: parts[14] || ''
+
+    claim.loops = result;
+  }
+
+  for (let i = 0; i < segments.length; i++) {
+    const parts = segments[i].split("*");
+    const tag = parts[0];
+
+    switch (tag) {
+      case "ISA":
+        currentEnvelope = {
+          senderId: parts[6] || '',
+          receiverId: parts[8] || '',
+          date: parts[9] || '',
+          time: parts[10] || '',
+          controlNumber: parts[13] || '',
+          usageIndicator: parts[14] || ''
+        };
+        break;
+
+      case "GS":
+        currentFunctionalGroup = {
+          functionalIdCode: parts[1] || '',
+          senderCode: parts[2] || '',
+          receiverCode: parts[3] || '',
+          date: parts[4] || '',
+          time: parts[5] || '',
+          controlNumber: parts[6] || '',
+          responsibleAgencyCode: parts[7] || '',
+          version: parts[8] || ''
+        };
+        break;
+
+      case "GE":
+        if (currentFunctionalGroup) {
+          currentFunctionalGroup.groupTrailer = {
+            numberOfTransactionSets: parts[1] || '',
+            controlNumber: parts[2] || ''
           };
-          break;
-  
-        case "GS":
-          currentFunctionalGroup = {
-            functionalIdCode: parts[1] || '',
-            senderCode: parts[2] || '',
-            receiverCode: parts[3] || '',
-            date: parts[4] || '',
-            time: parts[5] || '',
-            controlNumber: parts[6] || '',
-            responsibleAgencyCode: parts[7] || '',
-            version: parts[8] || ''
+        }
+        break;
+
+      case "IEA":
+        if (currentEnvelope) {
+          currentEnvelope.interchangeTrailer = {
+            numberOfGroups: parts[1] || '',
+            controlNumber: parts[2] || ''
           };
-          break;
-  
-        case "GE":
-          if (currentFunctionalGroup) {
-            currentFunctionalGroup.groupTrailer = {
-              numberOfTransactionSets: parts[1] || '',
-              controlNumber: parts[2] || ''
-            };
-          }
-          break;
-  
-        case "IEA":
-          if (currentEnvelope) {
-            currentEnvelope.interchangeTrailer = {
-              numberOfGroups: parts[1] || '',
-              controlNumber: parts[2] || ''
-            };
-          }
-          break;
-  
-        case "ST":
-          currentClaim = {
-            envelope: currentEnvelope,
-            functionalGroup: currentFunctionalGroup,
-            transaction: {
-              transactionSetId: parts[1] || '',
-              controlNumber: parts[2] || '',
-              implementationConventionReference: parts[3] || ''
-            },
-            loops: {},
-            notes: [],
-            serviceLines: [],
-            diagnoses: [],
-            adjustments: [],
-            attachments: [],
-            forms: [],
-            dates: [],
-            amounts: [],
-            k3: [],
-            otherInsurances: []
-          };
-          loopStack = [];
-          break;
-  
-        case "BHT":
-          currentClaim.batchHeader = {
-            hierarchicalStructureCode: parts[1] || '',
-            transactionSetPurposeCode: parts[2] || '',
-            referenceIdentification: parts[3] || '',
-            date: parts[4] || '',
-            time: parts[5] || '',
-            transactionTypeCode: parts[6] || ''
-          };
-          break;
-  
-        case "HL":
-          const loopId = `${parts[3]}_${parts[1]}`;
-          loopStack.push(loopId);
-          break;
-  
-        case "NM1":
-          currentEntityType = parts[1];
-          lastEntityType = currentEntityType;
-          const entity = {
-            entityType: parts[1] || '',
-            entityTypeQualifier: parts[2] || '',
-            name: parts[3] || '',
-            firstName: parts[4] || '',
-            middleName: parts[5] || '',
-            namePrefix: parts[6] || '',
-            nameSuffix: parts[7] || '',
-            idQualifier: parts[8] || '',
-            id: parts[9] || ''
-          };
-          const loopName = loopStack[loopStack.length - 1] || 'header';
-          const ctx = getLoopContext(loopName);
-          ctx[map[currentEntityType] || `entity_${currentEntityType}`] = entity;
-          break;
-  
-        case "REF":
-          const refObj = { qualifier: parts[1] || '', id: parts[2] || '' };
-          const loop = getLoopContext(loopStack[loopStack.length - 1] || 'header');
-          if (lastEntityType) {
-            loop[`ref_${lastEntityType}`] = loop[`ref_${lastEntityType}`] || [];
-            loop[`ref_${lastEntityType}`].push(refObj);
-          } else if (currentService) {
-            currentService.references = currentService.references || [];
-            currentService.references.push(refObj);
-          } else if (currentClaim) {
-            currentClaim.claimInfo = currentClaim.claimInfo || {};
-            currentClaim.claimInfo.references = currentClaim.claimInfo.references || [];
-            currentClaim.claimInfo.references.push(refObj);
-          }
-          break;
-  
-        case "N2":
-          currentAddressBuffer.address2 = parts[1] || '';
-          break;
-  
-        case "N3":
-          currentAddressBuffer.address1 = parts[1] || '';
-          break;
-  
-        case "N4":
-          currentAddressBuffer.city = parts[1] || '';
-          currentAddressBuffer.state = parts[2] || '';
-          currentAddressBuffer.zip = parts[3] || '';
-          getLoopContext(loopStack[loopStack.length - 1] || 'header').address = { ...currentAddressBuffer };
-          currentAddressBuffer = {};
-          break;
-  
-        case "PER":
-          getLoopContext(loopStack[loopStack.length - 1] || 'header').contact = {
-            contactFunctionCode: parts[1] || '',
-            name: parts[2] || '',
-            communicationNumberQualifier: parts[3] || '',
-            communicationNumber: parts[4] || ''
-          };
-          break;
-  
-        case "SBR":
-          currentClaim.otherInsurances.push({
-            responsibilityCode: parts[1] || '',
-            relationshipCode: parts[2] || '',
-            referenceId: parts[3] || '',
-            name: parts[4] || '',
-            insuranceTypeCode: parts[5] || ''
-          });
-          break;
-  
-        case "PAT":
-          getLoopContext('2000C').patient = { relationshipToSubscriber: parts[1] || '' };
-          break;
-  
-        case "DMG":
-          getLoopContext(loopStack[loopStack.length - 1] || 'header').demographics = {
-            dob: parts[2] || '',
-            gender: parts[3] || ''
-          };
-          break;
-  
-        case "DTP":
-          const dtpLoop = getLoopContext(loopStack[loopStack.length - 1] || 'header');
-          dtpLoop.dates = dtpLoop.dates || [];
-          dtpLoop.dates.push({
-            dateType: parts[1] || '',
-            format: parts[2] || '',
-            date: parts[3] || ''
-          });
-          break;
-  
-        case "CLM":
-          currentClaim.claimInfo = {
-            claimId: parts[1] || '',
-            totalAmount: parseFloat(parts[2]) || 0,
-            facilityCode: parts[5] || '',
-            frequencyCode: parts[6] || ''
-          };
-          break;
-  
-        case "CL1":
+        }
+        break;
+
+      case "ST":
+        currentClaim = {
+          envelope: currentEnvelope,
+          functionalGroup: currentFunctionalGroup,
+          transaction: {
+            transactionSetId: parts[1] || '',
+            controlNumber: parts[2] || '',
+            implementationConventionReference: parts[3] || ''
+          },
+          loops: {},
+          notes: [],
+          serviceLines: [],
+          diagnoses: [],
+          adjustments: [],
+          attachments: [],
+          forms: [],
+          dates: [],
+          amounts: [],
+          k3: [],
+          otherInsurances: []
+        };
+        loopStack = [];
+        break;
+
+      case "BHT":
+        currentClaim.batchHeader = {
+          hierarchicalStructureCode: parts[1] || '',
+          transactionSetPurposeCode: parts[2] || '',
+          referenceIdentification: parts[3] || '',
+          date: parts[4] || '',
+          time: parts[5] || '',
+          transactionTypeCode: parts[6] || ''
+        };
+        break;
+
+      case "HL":
+        const loopId = `${parts[3]}_${parts[1]}`;
+        loopStack.push(loopId);
+        break;
+
+      case "NM1":
+        currentEntityType = parts[1];
+        lastEntityType = currentEntityType;
+        const entity = {
+          entityType: parts[1] || '',
+          entityTypeQualifier: parts[2] || '',
+          name: parts[3] || '',
+          firstName: parts[4] || '',
+          middleName: parts[5] || '',
+          namePrefix: parts[6] || '',
+          nameSuffix: parts[7] || '',
+          idQualifier: parts[8] || '',
+          id: parts[9] || ''
+        };
+        const loopName = loopStack[loopStack.length - 1] || 'header';
+        const ctx = getLoopContext(loopName);
+        ctx[map[currentEntityType] || `entity_${currentEntityType}`] = entity;
+        break;
+
+      case "REF":
+        const refObj = { qualifier: parts[1] || '', id: parts[2] || '' };
+        const loop = getLoopContext(loopStack[loopStack.length - 1] || 'header');
+        if (lastEntityType) {
+          loop[`ref_${lastEntityType}`] = loop[`ref_${lastEntityType}`] || [];
+          loop[`ref_${lastEntityType}`].push(refObj);
+        } else if (currentService) {
+          currentService.references = currentService.references || [];
+          currentService.references.push(refObj);
+        } else if (currentClaim) {
           currentClaim.claimInfo = currentClaim.claimInfo || {};
-          currentClaim.claimInfo.classification = {
-            admissionType: parts[1] || '',
-            source: parts[2] || '',
-            dischargeStatus: parts[3] || ''
-          };
-          break;
-  
-        case "HI":
-          for (let j = 1; j < parts.length; j++) {
-            const [qual, code] = parts[j].split(/[:>]/);
-            if (code) {
-              currentClaim.diagnoses.push({ qualifier: qual, code });
-            }
+          currentClaim.claimInfo.references = currentClaim.claimInfo.references || [];
+          currentClaim.claimInfo.references.push(refObj);
+        }
+        break;
+
+      case "N2":
+        currentAddressBuffer.address2 = parts[1] || '';
+        break;
+
+      case "N3":
+        currentAddressBuffer.address1 = parts[1] || '';
+        break;
+
+      case "N4":
+        currentAddressBuffer.city = parts[1] || '';
+        currentAddressBuffer.state = parts[2] || '';
+        currentAddressBuffer.zip = parts[3] || '';
+        getLoopContext(loopStack[loopStack.length - 1] || 'header').address = { ...currentAddressBuffer };
+        currentAddressBuffer = {};
+        break;
+
+      case "PER":
+        getLoopContext(loopStack[loopStack.length - 1] || 'header').contact = {
+          contactFunctionCode: parts[1] || '',
+          name: parts[2] || '',
+          communicationNumberQualifier: parts[3] || '',
+          communicationNumber: parts[4] || ''
+        };
+        break;
+
+      case "SBR":
+        currentClaim.otherInsurances.push({
+          responsibilityCode: parts[1] || '',
+          relationshipCode: parts[2] || '',
+          referenceId: parts[3] || '',
+          name: parts[4] || '',
+          insuranceTypeCode: parts[5] || ''
+        });
+        break;
+
+      case "PAT":
+        getLoopContext('2000C').patient = { relationshipToSubscriber: parts[1] || '' };
+        break;
+
+      case "DMG":
+        getLoopContext(loopStack[loopStack.length - 1] || 'header').demographics = {
+          dob: parts[2] || '',
+          gender: parts[3] || ''
+        };
+        break;
+
+      case "DTP":
+        const dtpLoop = getLoopContext(loopStack[loopStack.length - 1] || 'header');
+        dtpLoop.dates = dtpLoop.dates || [];
+        dtpLoop.dates.push({
+          dateType: parts[1] || '',
+          format: parts[2] || '',
+          date: parts[3] || ''
+        });
+        break;
+
+      case "CLM":
+        currentClaim.claimInfo = {
+          claimId: parts[1] || '',
+          totalAmount: parseFloat(parts[2]) || 0,
+          facilityCode: parts[5] || '',
+          frequencyCode: parts[6] || ''
+        };
+        break;
+
+      case "CL1":
+        currentClaim.claimInfo = currentClaim.claimInfo || {};
+        currentClaim.claimInfo.classification = {
+          admissionType: parts[1] || '',
+          source: parts[2] || '',
+          dischargeStatus: parts[3] || ''
+        };
+        break;
+
+      case "HI":
+        for (let j = 1; j < parts.length; j++) {
+          const [qual, code] = parts[j].split(/[:>]/);
+          if (code) {
+            currentClaim.diagnoses.push({ qualifier: qual, code });
           }
-          break;
-  
-        case "NTE":
-          currentClaim.notes.push(parts[2] || '');
-          break;
-  
-        case "LX":
-          currentService = { lineNumber: parts[1] || '' };
-          currentClaim.serviceLines.push(currentService);
-          break;
-  
-        case "SV2":
-          const [hcpcs, modifiers] = (parts[2] || '').split(/>>?/);
-          Object.assign(currentService, {
-            revenueCode: parts[1] || '',
-            hcpcs: hcpcs || '',
-            modifiers: modifiers?.split('>') || [],
-            chargeAmount: parseFloat(parts[3]) || 0,
-            unit: parts[4] || '',
-            quantity: parseInt(parts[5]) || 0
-          });
-          break;
-  
-        case "SV1":
-          const svcParts = (parts[1] || '').split('>');
-          Object.assign(currentService, {
-            procedureCode: svcParts[1] || '',
-            modifiers: svcParts.slice(2),
-            chargeAmount: parseFloat(parts[2]) || 0,
-            unit: parts[4] || '',
-            quantity: parseInt(parts[5]) || 0
-          });
-          break;
-  
-        case "HCP":
-          const pricing = {
-            repricedAmount: parseFloat(parts[2]) || 0,
-            savingsAmount: parseFloat(parts[3]) || 0,
-            method: parts[4] || ''
-          };
-          if (currentService) currentService.pricing = pricing;
-          else currentClaim.pricing = pricing;
-          break;
-  
-        case "LIN":
-          if (currentService) currentService.ndc = parts[3] || '';
-          break;
-  
-        case "CTP":
-          if (currentService) {
-            currentService.unitPrice = parseFloat(parts[4]) || 0;
-            currentService.unitOfMeasure = parts[5] || '';
-          }
-          break;
-  
-        case "CAS":
-          currentClaim.adjustments.push({
-            groupCode: parts[1] || '',
-            reasonCode: parts[2] || '',
-            amount: parseFloat(parts[3]) || 0
-          });
-          break;
-  
-        case "AMT":
-          currentClaim.amounts.push({
-            qualifier: parts[1] || '',
-            amount: parseFloat(parts[2]) || 0
-          });
-          break;
-  
-        case "CN1":
-          currentClaim.contract = {
-            type: parts[1] || '',
-            amount: parts[2] || '',
-            percent: parts[3] || ''
-          };
-          break;
-  
-        case "PWK":
-          currentClaim.attachments.push({
-            reportType: parts[1] || '',
-            transmissionCode: parts[2] || '',
-            controlNumber: parts[5] || ''
-          });
-          break;
-  
-        case "K3":
-          currentClaim.k3.push(parts.slice(1).join("*"));
-          break;
-  
-        case "LQ":
-          currentClaim.forms.push({ qualifier: parts[1] || '', code: parts[2] || '' });
-          break;
-  
-        case "FRM":
-          if (currentClaim.forms.length > 0) {
-            currentClaim.forms[currentClaim.forms.length - 1].text = parts.slice(1).join("*");
-          }
-          break;
-  
-        case "OI":
-          currentClaim.otherInsurance = {
-            assignment: parts[1] || '',
-            release: parts[2] || '',
-            signature: parts[3] || ''
-          };
-          break;
-  
-        case "MOA":
-          currentClaim.moa = {
-            codes: parts.slice(1, 6),
-            qualifier: parts[6] || '',
-            amount: parts[7] || ''
-          };
-          break;
-  
-        case "SE":
-          normalizeLoops(currentClaim);
-          claims.push(currentClaim);
-          currentClaim = null;
-          currentService = null;
-          loopStack = [];
-          break;
-      }
+        }
+        break;
+
+      case "NTE":
+        currentClaim.notes.push(parts[2] || '');
+        break;
+
+      case "LX":
+        currentService = { lineNumber: parts[1] || '' };
+        currentClaim.serviceLines.push(currentService);
+        break;
+
+      case "SV2":
+
+        console.log('partssv2',parts);
+        const [hcpcs, modifiers] = (parts[2] || '').split(/>>?/);
+        Object.assign(currentService, {
+          revenueCode: parts[1] || '',
+          hcpcs: hcpcs || '',
+          modifiers: modifiers?.split('>') || [],
+          chargeAmount: parseFloat(parts[3]) || 0,
+          unit: parts[4] || '',
+          quantity: parseInt(parts[5]) || 0
+        });
+        break;
+
+      case "SV1":
+        console.log('partssv1',parts);
+        const svcParts = (parts[1] || '').split(':');
+        console.log('svcParts1',svcParts);
+        Object.assign(currentService, {
+          procedureCode: svcParts[1] || '',
+          modifiers: svcParts[2] || '',
+          chargeAmount: parseFloat(parts[2]) || 0,
+          unit: parts[4] || '',
+          quantity: parseInt(parts[5]) || 0
+        });
+        break;
+      
+
+     
+      
+
+      case "HCP":
+        const pricing = {
+          repricedAmount: parseFloat(parts[2]) || 0,
+          savingsAmount: parseFloat(parts[3]) || 0,
+          method: parts[4] || ''
+        };
+        if (currentService) currentService.pricing = pricing;
+        else currentClaim.pricing = pricing;
+        break;
+
+      case "LIN":
+        if (currentService) currentService.ndc = parts[3] || '';
+        break;
+
+      case "CTP":
+        if (currentService) {
+          currentService.unitPrice = parseFloat(parts[4]) || 0;
+          currentService.unitOfMeasure = parts[5] || '';
+        }
+        break;
+
+      case "CAS":
+        currentClaim.adjustments.push({
+          groupCode: parts[1] || '',
+          reasonCode: parts[2] || '',
+          amount: parseFloat(parts[3]) || 0
+        });
+        break;
+
+      case "AMT":
+        currentClaim.amounts.push({
+          qualifier: parts[1] || '',
+          amount: parseFloat(parts[2]) || 0
+        });
+        break;
+
+      case "CN1":
+        currentClaim.contract = {
+          type: parts[1] || '',
+          amount: parts[2] || '',
+          percent: parts[3] || ''
+        };
+        break;
+
+      case "PWK":
+        currentClaim.attachments.push({
+          reportType: parts[1] || '',
+          transmissionCode: parts[2] || '',
+          controlNumber: parts[5] || ''
+        });
+        break;
+
+      case "K3":
+        currentClaim.k3.push(parts.slice(1).join("*"));
+        break;
+
+      case "LQ":
+        currentClaim.forms.push({ qualifier: parts[1] || '', code: parts[2] || '' });
+        break;
+
+      case "FRM":
+        if (currentClaim.forms.length > 0) {
+          currentClaim.forms[currentClaim.forms.length - 1].text = parts.slice(1).join("*");
+        }
+        break;
+
+      case "OI":
+        currentClaim.otherInsurance = {
+          assignment: parts[1] || '',
+          release: parts[2] || '',
+          signature: parts[3] || ''
+        };
+        break;
+
+      case "MOA":
+        currentClaim.moa = {
+          codes: parts.slice(1, 6),
+          qualifier: parts[6] || '',
+          amount: parts[7] || ''
+        };
+        break;
+
+      case "SE":
+        normalizeLoops(currentClaim);
+        claims.push(currentClaim);
+        currentClaim = null;
+        currentService = null;
+        loopStack = [];
+        break;
     }
-  
-    return {
-      envelope: currentEnvelope,
-      functionalGroup: currentFunctionalGroup,
-      claims
-    };
+  }
+
+  return {
+    envelope: currentEnvelope,
+    functionalGroup: currentFunctionalGroup,
+    claims
+  };
 }
 export function getDetails(entity) {
 //   const nameParts = [

@@ -272,7 +272,19 @@ const fileModel = {
 
   async query(q) {
     console.log('query',q);
-    return await fileModel.model.find(q);
+    return await fileModel.model.find(q).populate({
+      path: 'updater',   // field with ObjectId that you want to populate
+      select: '_id firstname lastname email title bio location roles username avatarFile'  // fields you want to select (space-separated)
+    })
+    .populate({
+      path: 'versions',   // field with ObjectId that you want to populate
+      select: '_id name size status versionName data rawFile created updated uploaded creator updater organization slug'  // fields you want to select (space-separated)
+    })
+    .populate({
+      path: 'creator',   // field with ObjectId that you want to populate
+      select: '_id firstname lastname email title bio location roles username avatarFile'  // fields you want to select (space-separated)
+    }).lean();
+    
   },
 
   async findByType(t) {

@@ -320,6 +320,7 @@ export function parseX12File(content) {
           const svcParts = (parts[1] || '').split('>');
           Object.assign(currentService, {
             procedureCode: svcParts[1] || '',
+            hcpcs: svcParts[0] || '',
             modifiers: svcParts.slice(2),
             chargeAmount: parseFloat(parts[2]) || 0,
             unit: parts[4] || '',
@@ -453,46 +454,46 @@ export async function getGeo(address) {
 export async function addGeoX12(xd) {
     const claims = xd.claims || [];
 
-    for (let i = 0; i < claims.length; i++) {
-        const claim = claims[i];
-      console.log(claim);
+    // for (let i = 0; i < claims.length; i++) {
+    //     const claim = claims[i];
+    //   console.log(claim);
 
-        if(claim.loops.subscriber?.address){
-          let sgeoget = await getGeo(claim.loops.subscriber.address);
-          let r = sgeoget.results[0];
-          let sgeo = {
-              lat: r.geometry.location.lat,
-              lng: r.geometry.location.lng,
-          }
+    //     if(claim.loops.subscriber?.address){
+    //       let sgeoget = await getGeo(claim.loops.subscriber.address);
+    //       let r = sgeoget.results[0];
+    //       let sgeo = {
+    //           lat: r.geometry.location.lat,
+    //           lng: r.geometry.location.lng,
+    //       }
 
-          claim.loops.subscriber.geo = sgeo;
+    //       claim.loops.subscriber.geo = sgeo;
 
-        }
+    //     }
         
 
-        if(claim.loops.patient?.address){
-          let patgeoget = await getGeo(claim.loops.patient?.address);
-          if(patgeoget){
-              let pat = patgeoget.results[0];
-              let patgeo = {
-                  lat: pat.geometry.location.lat,
-                  lng: pat.geometry.location.lng,
-              }
-              claim.loops.patient.geo = patgeo;
-          }
+    //     if(claim.loops.patient?.address){
+    //       let patgeoget = await getGeo(claim.loops.patient?.address);
+    //       if(patgeoget){
+    //           let pat = patgeoget.results[0];
+    //           let patgeo = {
+    //               lat: pat.geometry.location.lat,
+    //               lng: pat.geometry.location.lng,
+    //           }
+    //           claim.loops.patient.geo = patgeo;
+    //       }
 
-        }
+    //     }
 
         
-        if(claim.loops.billingProvider?.address){
-          let pgeoget = await getGeo(claim.loops.billingProvider.address);
-          let rp = pgeoget.results[0];
-          let pgeo = {
-              lat: rp.geometry.location.lat,
-              lng: rp.geometry.location.lng,
-          }
-          claim.loops.billingProvider.geo = pgeo;
-        }
+    //     if(claim.loops.billingProvider?.address){
+    //       let pgeoget = await getGeo(claim.loops.billingProvider.address);
+    //       let rp = pgeoget.results[0];
+    //       let pgeo = {
+    //           lat: rp.geometry.location.lat,
+    //           lng: rp.geometry.location.lng,
+    //       }
+    //       claim.loops.billingProvider.geo = pgeo;
+    //     }
         
 
         
@@ -500,7 +501,7 @@ export async function addGeoX12(xd) {
 
        
 
-    }
+    // }
 
     xd.claims = claims;
     return xd;

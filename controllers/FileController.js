@@ -352,7 +352,7 @@ const FileController = {
                 };
             }
 
-            let rebased = parsedData.file.claims[0].pricing !== undefined;
+            let rebased = parsedData?.file?.claims[0]?.pricing !== undefined;
 
             // Create FileModel record
             let now = new Date();

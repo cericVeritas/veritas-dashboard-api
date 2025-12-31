@@ -11,6 +11,8 @@ import { authorize } from "../security/SecurityManager";
 import Errors from "../classes/Errors";
 import ErrorManager from "../classes/ErrorManager";
 
+import transporter from "../services/mailer";
+
 
 
 const InviteController = {
@@ -61,6 +63,13 @@ const InviteController = {
                 organization: data.type == "user" ? data.organization : null
             }
             const result = await InviteModel.create(d);
+            const mailOptions = {
+                from: "ceric@veritasallies.com",
+                to: data.email,
+                subject: 'You are invited!',
+                text: "You have been invited. Use the following code to accept the invitation "
+            };
+            await transporter.sendMail(mailOptions);
             res.json(result);
         } catch (err) {
             const safeErr = ErrorManager.getSafeError(err);

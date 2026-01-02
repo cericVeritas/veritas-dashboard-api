@@ -73,12 +73,12 @@ const OrganizationController = {
                 throw new Errors.MISSING_OBJECT();
             }
 
-            if (org._admins.indexOf(req.user._id) == -1) {
+            if (org._admins.indexOf(req.user.id) == -1 && req.user.roles.indexOf('superadmin') === -1) {
                 throw new Errors.UNAUTHORIZED();
             }
 
             const result = await OrganizationModel.delete(req.params.id);
-            res.json(result);
+            res.status(200).json({success: true, message: "Success", data: result});
         } catch (err) {
             const safeErr = ErrorManager.getSafeError(err);
             res.status(safeErr.status).json(safeErr);
@@ -200,7 +200,7 @@ const OrganizationController = {
                 throw new Errors.MISSING_OBJECT();
             }
 
-            if (org._admins.indexOf(req.user._id) == -1) {
+            if (org._admins.indexOf(req.user._id) == -1 && req.user.roles.indexOf('superadmin') === -1) {
                 throw new Errors.UNAUTHORIZED();
             }
 

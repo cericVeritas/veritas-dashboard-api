@@ -141,7 +141,7 @@ const organizationModel = {
   *
   */
   async delete(id) {
-    return await organizationModel.model.findByIdAndRemove(id);
+    return await organizationModel.model.findByIdAndDelete(id);
   },
 
   /**
@@ -174,7 +174,7 @@ const organizationModel = {
   *
   */
   async update(item) {
-    return await organizationModel.model.findOneAndUpdate({ _id: item._id }, item, {'new': true});
+    return await organizationModel.model.findOneAndUpdate({ _id: item.id }, {name: item.name}, {'new': true});
   },
 
   async findByUser(idUser) {

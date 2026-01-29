@@ -60,6 +60,10 @@ const inviteModel = {
             type: "Date",
             default: null,
         },
+        accountId: [{
+          type: Schema.ObjectId,
+          ref: "Account"
+        }]
 
     });
 
@@ -117,6 +121,10 @@ const inviteModel = {
 
   async getByType(type) {
     return await inviteModel.model.find({ type: type });
+  },
+
+  async getByAccountId(id) {
+    return await inviteModel.model.find({ accountId : id });
   },
 
   /**

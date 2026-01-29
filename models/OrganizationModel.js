@@ -79,6 +79,9 @@ const organizationModel = {
             type: "Number",
             default: 3,
         },
+        teamMemberCount: {
+            type: "Number"
+        },
         updated: {
             type: "Date",
             default: null,
@@ -95,8 +98,14 @@ const organizationModel = {
             type: Schema.ObjectId,
             ref: "User"
         },
+        accountId: {
+            type: Schema.ObjectId,
+            ref: "Account"
+        },
 
 
+    }, {
+        collection: "employerGroup" 
     });
 
     organizationModel.setModel(mongoose.model("Organization", organizationSchema));
@@ -165,6 +174,10 @@ const organizationModel = {
   */
   async list() {
     return await organizationModel.model.find();
+  },
+
+  async getOrgByAccountId(id) {
+    return await organizationModel.model.find({ accountId : id });
   },
 
   /**

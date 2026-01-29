@@ -20,17 +20,29 @@ const OrganizationController = {
      router.post(baseUrl + "", authorize(["ADMIN"]), OrganizationController.create);
      router.delete(baseUrl + "/:id", authorize(["ADMIN"]), OrganizationController.delete);
      router.get(baseUrl + "", authorize(["ADMIN"]), OrganizationController.list);
-     router.get(baseUrl + "/all", authorize(["ADMIN"]), OrganizationController.getOrgs);
-     router.get(baseUrl + "/invites", authorize(["ADMIN"]), OrganizationController.getOrgInvites);
+     router.get(baseUrl + "/all/:id", authorize(["ADMIN"]), OrganizationController.getOrgByAccountId);
+     router.get(baseUrl + "/invites/:id", authorize(["ADMIN"]), OrganizationController.getOrgInvites);
      router.get(baseUrl + "/team/:id", authorize(["ADMIN"]), OrganizationController.getTeam);
      router.get(baseUrl + "/team/invites/:id", authorize(["ADMIN"]), OrganizationController.getTeamInvites);
      router.get(baseUrl + "/:id", authorize([]), OrganizationController.get);
      router.post(baseUrl + "/:id", authorize(["ADMIN"]), OrganizationController.update);
+     router.get(baseUrl + "/getOrgByAccountsId", authorize(["ADMIN"]), OrganizationController.getOrgByAccountId);
    },
 
    get: async (req, res) => {
      try {
        const result = await OrganizationModel.get(req.params.id);
+       res.json(result);
+     } catch (err) {
+       const safeErr = ErrorManager.getSafeError(err);
+       res.status(safeErr.status).json(safeErr);
+     }
+   },
+
+   getOrgByAccountId: async (req, res) => {
+     try {
+        let params = req.params.id;
+       const result = await OrganizationModel.getOrgByAccountId(req.params.id);
        res.json(result);
      } catch (err) {
        const safeErr = ErrorManager.getSafeError(err);
@@ -113,7 +125,7 @@ const OrganizationController = {
 
     getOrgInvites: async (req, res) => {
         try {
-            const result = await InviteModel.getByType('organization');
+            const result = await InviteModel.getByAccountId(req.params.id);
             console.log(result)
             res.json(result);
         } catch (err) {

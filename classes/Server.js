@@ -34,6 +34,7 @@ import OrganizationController from "../controllers/OrganizationController";
 import InviteController from "../controllers/InviteController";
 import FileController from "../controllers/FileController";
 import CodeController from "../controllers/CodeController";
+import AccountController from "../controllers/AccountController";
 // import CoreController from "../controllers/CoreController";
 
 
@@ -216,6 +217,7 @@ class Server {
         InviteController.init(router);
         FileController.init(router);
         CodeController.init(router);
+        AccountController.init(router);
         Logger.info('init sequence complete')
 
         // Widget.init(router);

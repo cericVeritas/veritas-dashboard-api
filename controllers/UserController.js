@@ -329,31 +329,31 @@ const UserController = {
           });
 
           // Create org
-          let orgReturn = null;
-          if(!inviteLookup.organization){
-            req.body.name = req.body.orgname;
+          // let orgReturn = null;
+          // if(!inviteLookup.organization){
+          //   req.body.name = req.body.orgname;
         
-            if (!req.body.name) {
-                throw new Errors.MISSING_NAME();
-            }
+          //   if (!req.body.name) {
+          //       throw new Errors.MISSING_NAME();
+          //   }
 
-            req.body._users = [user._id];
-            req.body._admins = [user._id];
+          //   req.body._users = [user._id];
+          //   req.body._admins = [user._id];
 
-            req.body.created = now;
-            req.body.updated = now;
-            req.body.updater = user._id;
-            req.body.owner = user._id;
-            const resultOrg = await OrganizationModel.create(req.body);
-            orgReturn = resultOrg;
-          }else{
+          //   req.body.created = now;
+          //   req.body.updated = now;
+          //   req.body.updater = user._id;
+          //   req.body.owner = user._id;
+          //   const resultOrg = await OrganizationModel.create(req.body);
+          //   orgReturn = resultOrg;
+          // }else{
 
-            let org = await OrganizationModel.get(inviteLookup.organization._id);
-            org._users.push(user._id);
-            org._admins.push(user._id);
-            await org.save();
-            orgReturn = org;
-          }
+          //   let org = await OrganizationModel.get(inviteLookup.organization._id);
+          //   org._users.push(user._id);
+          //   org._admins.push(user._id);
+          //   await org.save();
+          //   orgReturn = org;
+          // }
 
 
 
@@ -425,7 +425,7 @@ const UserController = {
           let u = { ...user._doc };
           delete u.password;
 
-          res.status(200).json({ token, user: u, org: orgReturn });
+          res.status(200).json({ token, user: u });
 
 
       } catch (err) {

@@ -103,7 +103,11 @@ const userModel = {
             acceptedCookiesAt: {
                 type: "Date",
                 default: null,
-            }
+            },
+            accountId: [{
+                type: Schema.ObjectId,
+                ref: "Account"
+            }]
 
         });
 

@@ -60,7 +60,8 @@ const InviteController = {
                 created: now,
                 updated: now,
                 expires: expires,
-                organization: data.type == "user" ? data.organization : null
+                organization: null,
+                accountId: data.accountId
             }
             const result = await InviteModel.create(d);
             const mailOptions = {

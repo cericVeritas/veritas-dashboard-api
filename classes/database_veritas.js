@@ -10,6 +10,7 @@ import UserModel from "../models/UserModel";
 import InviteModel from "../models/InviteModel";
 import FileModel from "../models/FileModel";
 import CodeModel from "../models/CodeModel";
+import AccountModel from "../models/AccountModel";
 // import CoreModel from "../models/CoreModel";
 
 
@@ -33,6 +34,7 @@ class Database {
         OrganizationModel.init();
         FileModel.init();
         CodeModel.init();
+        AccountModel.init();
         Logger.info("Models initialized.");
 
 

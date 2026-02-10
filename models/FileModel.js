@@ -99,11 +99,9 @@ const fileModel = {
           type: "Date",
           default: null,
         },
-
-        
-        organization: {
-          type: Schema.ObjectId,
-            ref: "Organization"
+         accountIdSelected: {
+            type: Schema.ObjectId,
+            ref: "Account"
         },
         provider: {
           type: String,
@@ -238,7 +236,7 @@ const fileModel = {
 
   async findByOrg(id) {
     return await fileModel.model.find({
-        organization: id,
+        accountIdSelected: id,
         isParent: true
     }).populate({
       path: 'updater',   // field with ObjectId that you want to populate
@@ -246,7 +244,7 @@ const fileModel = {
     })
     .populate({
       path: 'versions',   // field with ObjectId that you want to populate
-      select: '_id name size status versionName data rawFile created updated uploaded creator updater organization slug'  // fields you want to select (space-separated)
+      select: '_id name size status versionName data rawFile created updated uploaded creator updater accountIdSelected slug'  // fields you want to select (space-separated)
     })
     .populate({
       path: 'creator',   // field with ObjectId that you want to populate

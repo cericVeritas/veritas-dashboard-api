@@ -205,7 +205,7 @@ const FileController = {
                 uploaded: now,
                 creator: user.id,
                 updater: user.id,
-                organization: result.organization._id,
+                accountIdSelected: result.accountIdSelected,
                 slug: nanoid(),
             };
 
@@ -239,9 +239,8 @@ const FileController = {
         console.log('=== UPLOAD FUNCTION CALLED ===');
         console.log('Request body:', req.body);
         console.log('Request files:', req.files);
-
-        let org = req.body.org;
         let lastModified = req.body.lastModified;
+        let accountSelected = req.body.accountSelected;
         let user = req.user;
 
         let uploadedFilePath = null; // Track the file path for cleanup
@@ -367,7 +366,7 @@ const FileController = {
                 uploaded: now,
                 creator: user.id,
                 updater: user.id,
-                organization: org,
+                accountIdSelected: accountSelected,
                 slug: nanoid(),
             };
 

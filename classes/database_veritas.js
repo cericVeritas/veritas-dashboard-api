@@ -59,13 +59,15 @@ class Database {
      * Start database connection
      */
 
-   
+
     async authenticate() {
         Logger.info("Authenticating to the databases...");
         try {
 
             // Connect
-            this.dbConnection = mongoose.connect(properties.DB_URL);
+            this.dbConnection = mongoose.connect(properties.DB_URL)
+                .then(() => console.log("Connected via Windows SSH Tunnel"))
+                .catch(err => console.error("Connection Error:", err));;
 
             // this.dbConnection = await mongoose.connect(properties.DB_URL, {
             //     useNewUrlParser: true,
@@ -75,13 +77,13 @@ class Database {
             Logger.info("Connected successfully to MongoDB");
 
             // if (mongoose.connection.readyState === 0) {
-                
+
             //     console.log("Connecting to MongoDB...");
 
             //     this.dbConnection = await mongoose.connect(properties.DB_URL, {
             //         useNewUrlParser: true,
             //         useUnifiedTopology: true,
-                   
+
             //     });
             //     // await mongoose.connect(url, {
             //     //     useNewUrlParser: true,

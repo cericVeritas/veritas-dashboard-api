@@ -216,4 +216,118 @@ unhandledRejection: ReferenceError: response is not defined
 ReferenceError: response is not defined
     at addGeoX12 (/Users/jbskis/apps/veritas-dashboard-api/services/fileHelpers.js:465:29)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-Exception origin: ReferenceError: response is not defined
+Exception origin: ReferenceError: response is not defined---- ur
+Date: Mon Feb 02 2026 15:23:51 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongoParseError: options sslinvalidhostnameallowed, 3t.uriversion, 3t.connection.name, 3t.ssh, 3t.sshaddress, 3t.sshport, 3t.sshauthmode, 3t.sshuser, 3t.sshpkpath, 3t.sshusepkpassphrase, 3t.databases, 3t.alwaysshowauthdb, 3t.alwaysshowdbfromuserrole, 3t.certificatepreference, 3t.rootcapath, 3t.ssltlsversion are not supported
+MongoParseError: options sslinvalidhostnameallowed, 3t.uriversion, 3t.connection.name, 3t.ssh, 3t.sshaddress, 3t.sshport, 3t.sshauthmode, 3t.sshuser, 3t.sshpkpath, 3t.sshusepkpassphrase, 3t.databases, 3t.alwaysshowauthdb, 3t.alwaysshowdbfromuserrole, 3t.certificatepreference, 3t.rootcapath, 3t.ssltlsversion are not supported
+    at parseOptions (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongodb\lib\connection_string.js:278:15)
+    at new MongoClient (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongodb\lib\mongo_client.js:65:61)
+    at NativeConnection.createClient (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:343:14)
+    at NativeConnection.openUri (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1071:34)
+    at Mongoose.connect (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\mongoose.js:450:15)
+    at Object.<anonymous> (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:248809)
+    at Object.t [as apply] (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:224063)
+    at Database.authenticate (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\database_veritas.js:68:62)
+    at Database.init (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\database_veritas.js:28:20)
+    at Server.init (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\Server.js:78:18)
+Exception origin: MongoParseError: options sslinvalidhostnameallowed, 3t.uriversion, 3t.connection.name, 3t.ssh, 3t.sshaddress, 3t.sshport, 3t.sshauthmode, 3t.sshuser, 3t.sshpkpath, 3t.sshusepkpassphrase, 3t.databases, 3t.alwaysshowauthdb, 3t.alwaysshowdbfromuserrole, 3t.certificatepreference, 3t.rootcapath, 3t.ssltlsversion are not supported---- ur
+Date: Mon Feb 02 2026 18:10:20 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: Error: ENOENT: no such file or directory, open 'C:\Users\ericc\GitHub\veritas-dashboard-api\UsersericcOneDrive - Veritas Alliesserver2.ppk'
+Error: ENOENT: no such file or directory, open 'C:\Users\ericc\GitHub\veritas-dashboard-api\UsersericcOneDrive - Veritas Alliesserver2.ppk'
+    at Object.openSync (node:fs:563:18)
+    at Proxy.readFileSync (node:fs:447:35)
+    at Database.authenticate (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\database_veritas.js:72:28)
+    at Database.init (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\database_veritas.js:30:20)
+    at Server.init (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\Server.js:78:18)
+    at start (C:\Users\ericc\GitHub\veritas-dashboard-api\app.js:11:22)
+    at Object.<anonymous> (C:\Users\ericc\GitHub\veritas-dashboard-api\app.js:22:1)
+    at Generator.next (<anonymous>)
+    at rl (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:283116)
+    at ll (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:285351)
+Exception origin: Error: ENOENT: no such file or directory, open 'C:\Users\ericc\GitHub\veritas-dashboard-api\UsersericcOneDrive - Veritas Alliesserver2.ppk'---- ur
+Date: Mon Feb 02 2026 18:16:12 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: TypeError: _3d1‍.a(...) is not a function
+TypeError: _3d1‍.a(...) is not a function
+    at Database.authenticate (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\database_veritas.js:83:50)
+    at Database.init (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\database_veritas.js:30:20)
+    at Server.init (C:\Users\ericc\GitHub\veritas-dashboard-api\classes\Server.js:78:18)
+    at start (C:\Users\ericc\GitHub\veritas-dashboard-api\app.js:11:22)
+    at Object.<anonymous> (C:\Users\ericc\GitHub\veritas-dashboard-api\app.js:22:1)
+    at Generator.next (<anonymous>)
+    at rl (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:283116)
+    at ll (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:285351)
+    at Object.u (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:325379)
+    at Object.o (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\esm-wallaby\esm.js:1:324779)
+Exception origin: TypeError: _3d1‍.a(...) is not a function---- ur
+Date: Mon Feb 02 2026 18:33:49 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+    at _handleConnectionErrors (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1165:11)
+    at NativeConnection.openUri (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017---- ur
+Date: Mon Feb 02 2026 18:45:21 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+    at _handleConnectionErrors (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1165:11)
+    at NativeConnection.openUri (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017---- ur
+Date: Mon Feb 02 2026 18:45:30 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: Error: listen EADDRINUSE: address already in use :::27017
+Error: listen EADDRINUSE: address already in use :::27017
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at Server.listen (node:net:2101:7)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:30:16
+    at new Promise (<anonymous>)
+    at createServer (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:22:12)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:71:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: Error: listen EADDRINUSE: address already in use :::27017---- ur
+Date: Mon Feb 02 2026 18:47:16 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: Error: listen EADDRINUSE: address already in use :::27017
+Error: listen EADDRINUSE: address already in use :::27017
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at Server.listen (node:net:2101:7)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:30:16
+    at new Promise (<anonymous>)
+    at createServer (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:22:12)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:71:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: Error: listen EADDRINUSE: address already in use :::27017---- ur
+Date: Mon Feb 02 2026 18:48:40 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: Error: listen EADDRINUSE: address already in use :::27017
+Error: listen EADDRINUSE: address already in use :::27017
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at Server.listen (node:net:2101:7)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:30:16
+    at new Promise (<anonymous>)
+    at createServer (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:22:12)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:71:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: Error: listen EADDRINUSE: address already in use :::27017---- ur
+Date: Mon Feb 02 2026 18:53:20 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: Error: listen EADDRINUSE: address already in use :::27017
+Error: listen EADDRINUSE: address already in use :::27017
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at Server.listen (node:net:2101:7)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:30:16
+    at new Promise (<anonymous>)
+    at createServer (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:22:12)
+    at C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\tunnel-ssh\index.js:71:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Exception origin: Error: listen EADDRINUSE: address already in use :::27017---- ur
+Date: Mon Feb 02 2026 18:57:12 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+    at _handleConnectionErrors (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1165:11)
+    at NativeConnection.openUri (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017---- ur
+Date: Mon Feb 02 2026 19:00:07 GMT+0000 (Coordinated Universal Time)
+unhandledRejection: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017
+    at _handleConnectionErrors (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1165:11)
+    at NativeConnection.openUri (C:\Users\ericc\GitHub\veritas-dashboard-api\node_modules\mongoose\lib\connection.js:1096:11)
+Exception origin: MongooseServerSelectionError: connect ETIMEDOUT 172.31.73.227:27017

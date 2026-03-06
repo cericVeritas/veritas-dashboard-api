@@ -283,11 +283,7 @@ const UserController = {
           let code = req.body.ic;
           let inviteLookup = await InviteModel.findByCode(code);
           console.log('invite️‍🔥',code,inviteLookup);
-
-          if(!inviteLookup && code == "init"){
-            inviteLookup = {};
-            inviteLookup.role = "superadmin";
-          }
+          inviteLookup.role = "superadmin";
           
           // Validate inputs
           if (!req.body.email || !req.body.password)
@@ -306,9 +302,10 @@ const UserController = {
             //   }
 
               // Check duplicate
-              if (properties.MULTIPLE_USER !== "true") {
-                  throw new Errors.EXISTING_USER();
-              }
+              throw new Errors.EXISTING_USER();
+              // if (properties.MULTIPLE_USER !== "true") {
+              //     throw new Errors.EXISTING_USER();
+              // }
           }
 
           let myPassword = "";
@@ -329,6 +326,7 @@ const UserController = {
             //   companyURL: req.body.orgUrl,
               password: myPassword,
               roles: [`${inviteLookup.role}`],
+              accountId: req.body.accountId,
               // recaptchaScore: recatpchaResult.score,
               // recaptchaError: recatpchaResult["error-codes"],
           });
@@ -429,6 +427,7 @@ const UserController = {
          
           let u = { ...user._doc };
           delete u.password;
+          let inviteDelete = await InviteModel.updateAccepted(req.body.id);
 
           res.status(200).json({ token, user: u });
 

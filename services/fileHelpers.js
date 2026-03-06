@@ -508,7 +508,7 @@ export async function addGeoX12(xd) {
   
 }
 
-export async function processX12(x12, type='reprice') {
+export async function processX12(x12, type='reprice', markUp=1.5) {
     let repriceUrl = process.env.REPRICE_URL;
     // auditOnly = true;
     const x12Buffer = Buffer.from(x12); // if x12 is a string, otherwise use as-is
@@ -519,7 +519,8 @@ export async function processX12(x12, type='reprice') {
         filename: 'claim.x12',
         content_type: 'text/plain'
       },
-      'auditOnly': type == 'audit'
+      'auditOnly': type == 'audit',
+      markUp: markUp
     };
     
 

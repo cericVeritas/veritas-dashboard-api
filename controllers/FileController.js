@@ -175,10 +175,11 @@ const FileController = {
             let user = req.user;
             let ptype = req.body.type;
             let slug = req.body.slug;
+            let markUp = req.body.markUp;
             const result = await FileModel.findBySlug(slug);
             let x12 = result.rawFile;
             console.log('x12',x12);
-            let repriceData = await processX12(x12, ptype);
+            let repriceData = await processX12(x12, ptype, markUp);
 
             if(!repriceData){
                 console.log(`⚠️ ${ptype} error!`);

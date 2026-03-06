@@ -17,7 +17,7 @@ const OrganizationController = {
 
    init: router => {
      const baseUrl = `${Properties.API}/organization`;
-     router.post(baseUrl + "", authorize(["ADMIN"]), OrganizationController.create);
+     router.post(baseUrl + "", authorize([]), OrganizationController.create);
      router.delete(baseUrl + "/:id", authorize(["ADMIN"]), OrganizationController.delete);
      router.get(baseUrl + "", authorize(["ADMIN"]), OrganizationController.list);
      router.get(baseUrl + "/all/:id", authorize(["ADMIN"]), OrganizationController.getOrgByAccountId);
@@ -61,8 +61,8 @@ const OrganizationController = {
                 throw new Errors.MISSING_NAME();
             }
 
-            req.body._users = [req.user._id];
-            req.body._admins = [req.user._id];
+            req.body._users = [req.user.id];
+            req.body._admins = [req.user.id];
             const result = await OrganizationModel.create(req.body);
             res.json(result);
         } catch (err) {

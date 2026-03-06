@@ -23,6 +23,12 @@ const accountModel = {
             type: "String",
             default: null,
         },
+        settings: {
+            markUp: {
+                type: "Double",
+                default: 1.5,
+            },
+        },
 
     });
 
@@ -111,6 +117,10 @@ const accountModel = {
   async update(item) {
     return await accountModel.model.findOneAndUpdate({ _id: item.id }, {name: item.name}, {'new': true});
   },
+
+  async updateMarkUp(item) {
+    return await accountModel.model.findOneAndUpdate({ _id: item.id }, {settings: {...item.settings, markUp: item.markUp}}, {'new': true});
+  }
 
 
 

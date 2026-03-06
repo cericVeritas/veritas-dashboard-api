@@ -127,6 +127,10 @@ const inviteModel = {
     return await inviteModel.model.find({ accountId : id });
   },
 
+  async updateAccepted(id) {
+    return await inviteModel.model.findOneAndUpdate({ _id: id }, {acceptedAt: new Date()}, {'new': true});
+  },
+
   /**
   * OrganizationModel.update
   *   @description CRUD ACTION update

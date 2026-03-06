@@ -17,6 +17,7 @@ const AccountController = {
    init: router => {
      const baseUrl = `${Properties.API}/account`;
      router.get(baseUrl + "/all", authorize(["ADMIN"]), AccountController.getAccounts);
+     router.post(baseUrl + "/updateMarkUp", authorize(["ADMIN"]), AccountController.updateMarkUp);
    },
 
     getAccounts: async (req, res) => {
@@ -30,6 +31,18 @@ const AccountController = {
             res.status(safeErr.status).json(safeErr);
         }
     },
+
+    updateMarkUp: async (req, res) => {
+        try {
+            const { accountId, markup } = req.body;
+            const result = await AccountModel.updateMarkUp({ id: accountId, markUp: parseFloat(markup) });
+            res.json(result);
+        } catch (err) {
+            const safeErr = ErrorManager.getSafeError(err);
+            res.status(safeErr.status).json(safeErr);
+        }
+    },
+
 };
 
 export default {

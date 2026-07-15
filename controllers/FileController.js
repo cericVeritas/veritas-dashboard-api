@@ -37,6 +37,7 @@ const FileController = {
         
         router.post(baseUrl + "/query", authorize(["USER"]), FileController.query);
         router.post(baseUrl + "/process", authorize(["USER"]), FileController.process);
+        router.post(baseUrl + "/processBulkRepirce", authorize(["USER"]), FileController.processBulkRepirce);
         router.post(baseUrl + "/:id", authorize(["ADMIN"]), FileController.update);
         
     },
@@ -226,6 +227,110 @@ const FileController = {
 
             
             res.json(fileCreated);
+        } catch (err) {
+            const safeErr = ErrorManager.getSafeError(err);
+            res.status(safeErr.status).json(safeErr);
+        }
+    },
+
+    processBulkRepirce: async (req, res) => {
+        try {
+            let user = req.user;
+            const payload = req.body || {};
+            const files = Array.isArray(payload)
+                ? payload
+                : payload.files || payload.items || payload.payload;
+
+            if (!Array.isArray(files) || files.length === 0) {
+                return res.status(400).json({
+                    success: false,
+                    error: 'Payload must be a non-empty array of files'
+                });
+            }
+
+            const results = [];
+
+            for (const file of files) {
+                const fileData = file || {};
+                const ptype = fileData.type;
+                const slug = fileData.slug;
+                const markUp = fileData.markUp ?? fileData.markup;
+
+                try {
+                    if (!slug || !ptype) {
+                        throw new Error('slug and type are required');
+                    }
+
+                    const result = await FileModel.findBySlug(slug);
+                    if (!result) {
+                        throw new Error('File not found');
+                    }
+
+                    let x12 = result.rawFile;
+                    let repriceData = await processX12(x12, ptype, markUp);
+
+                    if (!repriceData || repriceData.error) {
+                        throw new Error(repriceData?.error || 'Reprice failed');
+                    }
+
+                    let now = new Date();
+                    const versions = result.versions || [];
+                    const versionNumber = versions.length + 1;
+
+                    const newFile = {
+                        name: `${result.name.replace(/\.x12/g, '')}_reprice_${versionNumber}.x12`,
+                        size: result.size,
+                        rawFile: repriceData.raw,
+                        data: repriceData,
+                        status: ptype == "reprice" ? "repriced" : "audited",
+                        versionName: `${ptype}_${versionNumber}`,
+                        isParent: false,
+                        parent: result._id,
+                        created: now,
+                        updated: now,
+                        uploaded: now,
+                        creator: user.id,
+                        updater: user.id,
+                        accountIdSelected: result.accountIdSelected,
+                        slug: nanoid(),
+                    };
+
+                    const fileCreated = await FileModel.create(newFile);
+
+                    const updateData = {
+                        _id: result._id,
+                        versions: [...versions.map(version => version._id || version), fileCreated._id],
+                        updated: now,
+                        status: ptype == "reprice" ? "repriced" : "audited"
+                    };
+
+                    await FileModel.update(updateData);
+
+                    results.push({
+                        success: true,
+                        slug,
+                        type: ptype,
+                        file: fileCreated
+                    });
+                } catch (error) {
+                    results.push({
+                        success: false,
+                        slug,
+                        type: ptype,
+                        error: error.message
+                    });
+                }
+            }
+
+            const successCount = results.filter(result => result.success).length;
+            const failedCount = results.length - successCount;
+
+            res.status(successCount > 0 ? 200 : 400).json({
+                success: failedCount === 0,
+                processed: successCount,
+                failed: failedCount,
+                results
+            });
         } catch (err) {
             const safeErr = ErrorManager.getSafeError(err);
             res.status(safeErr.status).json(safeErr);

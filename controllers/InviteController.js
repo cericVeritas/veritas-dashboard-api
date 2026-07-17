@@ -68,7 +68,7 @@ const InviteController = {
                 from: "ceric@veritasallies.com",
                 to: data.email,
                 subject: 'You are invited!',
-                text: `You have been invited. Use the following code to accept the invitation http://localhost:3333/signup?invitecode=${inviteCode}`
+                text: `You have been invited. Use the following code to accept the invitation https://dev.d14ehiegu4hr4c.amplifyapp.com/signup?invitecode=${inviteCode}`
             };
             await transporter.sendMail(mailOptions);
             res.json(result);

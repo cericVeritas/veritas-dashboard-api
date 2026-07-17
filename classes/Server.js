@@ -97,35 +97,35 @@ class Server {
             next();
         });
 
-        // this.app.use(require('express-status-monitor')());
+        this.app.use(require('express-status-monitor')());
 
 
-        // this.app.use(require('express-status-monitor')({
-        //     path: '/status',
-        //     chartVisibility: {
-        //       cpu: true,
-        //       mem: true,
-        //       load: true,
-        //       rps: true,
-        //       statusCodes: true,
-        //       responseTime: true,
-        //     },
+        this.app.use(require('express-status-monitor')({
+            path: '/status',
+            chartVisibility: {
+              cpu: true,
+              mem: true,
+              load: true,
+              rps: true,
+              statusCodes: true,
+              responseTime: true,
+            },
             
-        //     // Set colors for charts
-        //     chartColors: {
-        //       cpu: '#00FF41',
-        //       mem: '#00FF41',
-        //       load: '#00FF41',
-        //       rps: '#00FF41',
-        //       responseTime: '#00FF41',
-        //       statusCodes: {
-        //         '2xx': '#00FF41',
-        //         '3xx': '#3FB6A9',
-        //         '4xx': '#FFC952',
-        //         '5xx': '#FF312E',
-        //       },
-        //     },
-        // }));
+            // Set colors for charts
+            chartColors: {
+              cpu: '#00FF41',
+              mem: '#00FF41',
+              load: '#00FF41',
+              rps: '#00FF41',
+              responseTime: '#00FF41',
+              statusCodes: {
+                '2xx': '#00FF41',
+                '3xx': '#3FB6A9',
+                '4xx': '#FFC952',
+                '5xx': '#FF312E',
+              },
+            },
+        }));
 
 
 
@@ -161,7 +161,7 @@ class Server {
         };
         Logger.info("Limiting CORS origins to: " + properties.CORS_ORIGIN);
 
-        this.app.use(cors(corsOptions));
+         this.app.use(cors(corsOptions));
         // this.app.use(mongoSanitize());
 
       

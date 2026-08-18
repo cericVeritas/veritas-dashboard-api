@@ -18,7 +18,7 @@ const ContractController = {
 
         router.post(
             baseUrl + "/getGlobalContracts",
-            authorize(["USER"]),
+            authorize(["USER", "CONTRACT"]),
             ContractController.getGlobalContracts
         );
     },

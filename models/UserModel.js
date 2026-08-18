@@ -66,7 +66,7 @@ const userModel = {
             // not sure if this will be primary role source, for superadmin probably.
             roles: {
                 type: [String],
-                enum: ['user', 'admin', 'superadmin'], // These are the roles available
+                enum: ['user', 'admin', 'superadmin', 'contract'], // These are the roles available
                 default: ['user']
             },
 

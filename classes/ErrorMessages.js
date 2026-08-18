@@ -19,7 +19,7 @@ const ErrorMessages = Object.freeze({
     INVALID_BODY: { status: 400, message: "Invalid JSON body" },
     INVALID_QUERY: { status: 400, message: "Invalid query string" },
     MISSING_DOMAIN: { status: 400, message: "Missing domain" },
-    EXISTING_USER: { status: 400, message: "Email in use" },
+    EXISTING_USER: { status: 400, message: "Email/User already exists" },
     INVALID_CAPTCHA: { status: 401, message: "Invalid captcha" },
     MISSING_NAME: { status: 400, message: "Missing name" },
     MISSING_OBJECT: { status: 400, message: "Value not found" },

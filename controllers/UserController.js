@@ -281,9 +281,11 @@ const UserController = {
           console.log('body 🔥',req.body);
 
           let code = req.body.ic;
-          let inviteLookup = await InviteModel.findByCode(code);
-          console.log('invite️‍🔥',code,inviteLookup);
-          inviteLookup.role = "superadmin";
+          let inviteLookup = { role: "contract" };
+          if (code) {
+              inviteLookup = await InviteModel.findByCode(code);
+              inviteLookup.role = "superadmin";
+          }
           
           // Validate inputs
           if (!req.body.email || !req.body.password)
@@ -427,7 +429,9 @@ const UserController = {
          
           let u = { ...user._doc };
           delete u.password;
-          let inviteDelete = await InviteModel.updateAccepted(req.body.id);
+          if (code) {
+              await InviteModel.updateAccepted(req.body.id);
+          }
 
           res.status(200).json({ token, user: u });
 

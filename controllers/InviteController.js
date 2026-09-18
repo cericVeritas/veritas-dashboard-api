@@ -12,6 +12,7 @@ import Errors from "../classes/Errors";
 import ErrorManager from "../classes/ErrorManager";
 
 import transporter from "../services/mailer";
+import invitationEmail from "../templates/invitationEmail";
 
 
 
@@ -64,11 +65,18 @@ const InviteController = {
                 accountId: data.accountId
             }
             const result = await InviteModel.create(d);
+            const invitationUrl = `https://dev.d14ehiegu4hr4c.amplifyapp.com/signup?invitecode=${inviteCode}`;
+            const recipientName = data.firstname || data.firstName || data.name || "there";
             const mailOptions = {
                 from: "ceric@veritasallies.com",
                 to: data.email,
                 subject: 'You are invited!',
-                text: `You have been invited. Use the following code to accept the invitation https://dev.d14ehiegu4hr4c.amplifyapp.com/signup?invitecode=${inviteCode}`
+                text: `You're Invited!\n\nHi ${recipientName},\n\nWe are excited to invite you to our upcoming event. View the invitation and secure your spot: ${invitationUrl}`,
+                html: invitationEmail({
+                    recipientName,
+                    invitationUrl,
+                    year: now.getFullYear()
+                })
             };
             await transporter.sendMail(mailOptions);
             res.json(result);

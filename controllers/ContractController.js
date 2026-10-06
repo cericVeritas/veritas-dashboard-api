@@ -21,6 +21,11 @@ const ContractController = {
             authorize(["USER", "CONTRACT"]),
             ContractController.getGlobalContracts
         );
+        router.post(
+            baseUrl + "/applyForGlobalContract",
+            authorize(["USER", "CONTRACT"]),
+            ContractController.applyForGlobalContract
+        );
     },
 
     getGlobalContracts: async (req, res) => {
@@ -44,6 +49,22 @@ const ContractController = {
                 "post",
                 GLOBAL_CONTRACTS_URL,
                 { prefix, offset },
+                { json: true }
+            );
+
+            return res.status(response.statusCode).json(response.body);
+        } catch (err) {
+            const safeErr = ErrorManager.getSafeError(err);
+            return res.status(safeErr.status).json(safeErr);
+        }
+    },
+
+    applyForGlobalContract: async (req, res) => {
+        try {
+            const response = await needle(
+                "post",
+                GLOBAL_CONTRACTS_URL,
+                req.body,
                 { json: true }
             );
 

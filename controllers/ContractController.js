@@ -9,8 +9,9 @@ import ErrorManager from "../classes/ErrorManager";
 
 import needle from "needle";
 
-const GLOBAL_CONTRACTS_URL =
-    "https://veritasallies.net/opensearch/getGlobalContracts";
+const GLOBAL_CONTRACTS_URL = "https://veritasallies.net/opensearch/getGlobalContracts";
+
+const APPLY_CONTRACTS_URL = "https://veritasallies.net/opensearch/applyForGlobalContract";
 
 const ContractController = {
     init: router => {
@@ -63,7 +64,7 @@ const ContractController = {
         try {
             const response = await needle(
                 "post",
-                GLOBAL_CONTRACTS_URL,
+                APPLY_CONTRACTS_URL,
                 req.body,
                 { json: true }
             );
